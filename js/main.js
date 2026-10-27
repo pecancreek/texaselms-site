@@ -22,7 +22,7 @@
   // Prefill the contact form when someone asks about a specific lot
   var msg = document.getElementById('f-msg');
   function askAbout(n) {
-    if (msg && !msg.value) msg.value = "I'm interested in Lot " + n + ". ";
+    if (msg && !msg.value) msg.value = "I'm interested in " + (/^\d+$/.test(n) ? 'Lot ' + n : n) + ". ";
   }
   document.addEventListener('click', function (e) {
     var a = e.target.closest('[data-ask]');
@@ -47,7 +47,22 @@
       var n = a.getAttribute('data-lot'), d = lots[n];
       if (selected) selected.classList.remove('is-selected');
       a.classList.add('is-selected'); selected = a;
-      var url = base + 'portfolio-collections/lot-' + n;
+      var url = base + (d.url || ('portfolio-collections/lot-' + n));
+      if (d.status === 'home') {
+        panel.innerHTML =
+          '<div class="panel-lot">' +
+            '<img src="' + base + d.img + '" alt="' + d.address + '" width="750" height="500">' +
+            '<div class="panel-body">' +
+              '<span class="pill pill-home">' + d.label + '</span>' +
+              '<h3>' + d.address + '</h3>' +
+              '<p class="panel-meta"><span>' + d.facts + '</span><span><strong>' + d.price + '</strong></span></p>' +
+              '<p>' + d.desc + '</p>' +
+              '<div class="actions"><a class="btn btn-earth" href="' + url + '">See the home</a><a class="btn btn-outline" href="#contact" data-ask="' + d.address + '">Ask about it</a></div>' +
+            '</div>' +
+          '</div>';
+        if (window.innerWidth < 1000) panel.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        return;
+      }
       var price = d.status === 'sold' ? '' : '<span><strong>' + d.price + '</strong></span>';
       var primary = d.status === 'sold'
         ? '<a class="btn btn-outline" href="' + url + '">View lot</a>'
@@ -65,6 +80,29 @@
         '</div>';
       if (window.innerWidth < 1000) panel.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
     }
+  }
+
+  // Photo viewer for the home gallery
+  var items = Array.prototype.slice.call(document.querySelectorAll('.gallery-item'));
+  if (items.length && window.HTMLDialogElement) {
+    var dlg = document.createElement('dialog');
+    dlg.className = 'viewer';
+    dlg.innerHTML = '<figure><img alt=""><figcaption></figcaption></figure>' +
+      '<button class="v-prev" aria-label="Previous photo">&#8249;</button><button class="v-next" aria-label="Next photo">&#8250;</button>' +
+      '<button class="v-close" aria-label="Close">&times;</button>';
+    document.body.appendChild(dlg);
+    var vi = dlg.querySelector('img'), vc = dlg.querySelector('figcaption'), cur = 0;
+    function show(i) {
+      cur = (i + items.length) % items.length;
+      var it = items[cur];
+      vi.src = it.getAttribute('href'); vi.alt = it.querySelector('img').alt; vc.textContent = it.getAttribute('data-caption');
+    }
+    items.forEach(function (it, i) { it.addEventListener('click', function (e) { e.preventDefault(); show(i); dlg.showModal(); }); });
+    dlg.querySelector('.v-prev').onclick = function () { show(cur - 1); };
+    dlg.querySelector('.v-next').onclick = function () { show(cur + 1); };
+    dlg.querySelector('.v-close').onclick = function () { dlg.close(); };
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+    dlg.addEventListener('keydown', function (e) { if (e.key === 'ArrowLeft') show(cur - 1); if (e.key === 'ArrowRight') show(cur + 1); });
   }
 
   // Sort available lots

@@ -63,12 +63,12 @@ p { margin: 0 0 1em; }
 .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 68px; }
 .brand img { width: 104px; }
 .site-nav ul { list-style: none; display: flex; align-items: center; gap: clamp(12px, 3vw, 32px); margin: 0; padding: 0; }
-.site-nav a:not(.btn) { text-decoration: none; font-weight: 500; font-size: .98rem; padding: 6px 0; border-bottom: 2px solid transparent; }
+.site-nav a:not(.btn) { white-space: nowrap; text-decoration: none; font-weight: 500; font-size: .98rem; padding: 6px 0; border-bottom: 2px solid transparent; }
 .site-nav a:not(.btn):hover, .site-nav a[aria-current] { border-bottom-color: var(--earth); color: var(--ink); }
 @media (max-width: 560px) {
   .brand img { width: 84px; }
-  .site-nav ul { gap: 14px; }
-  .site-nav a:not(.btn) { font-size: .9rem; }
+  .site-nav ul { gap: 12px; }
+  .site-nav a:not(.btn) { font-size: .84rem; white-space: nowrap; }
   .nav-cta { display: none; }
 }
 
@@ -129,7 +129,8 @@ p { margin: 0 0 1em; }
 .panel-lot img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: var(--caliche); }
 .panel-body { padding: 20px 22px 24px; }
 .panel-body h3 { font-size: 1.9rem; margin: .35em 0 .2em; }
-.panel-meta { display: flex; gap: 18px; font-size: 1.05rem; margin-bottom: .8em; }
+.panel-meta { display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: 1.05rem; margin-bottom: .8em; }
+.panel-meta span { white-space: nowrap; }
 .panel-meta strong { font-weight: 600; }
 .panel-body p { font-size: .95rem; color: var(--ink-soft); }
 .panel-body .actions { margin-top: 1em; gap: 10px; }
@@ -252,3 +253,62 @@ address { font-style: normal; line-height: 2; margin-top: 1.4em; font-size: 1.05
 .footer-base .footer-nav a { margin-left: 18px; }
 .footer-base .footer-nav a:first-child { margin-left: 0; }
 .footer-legal { flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 6px 24px; }
+
+/* ---------- new home */
+.lotmap .is-home polygon { fill: var(--pasture); }
+.lotmap .is-home text { fill: #fff; }
+.lotmap .is-home:hover polygon, .lotmap .is-home:focus polygon { fill: #46553a; }
+.key-home { background: var(--pasture); }
+.pill-home { background: var(--pasture); color: #fff; }
+.feature { background: var(--stone); }
+.feature-grid { display: grid; gap: 36px; align-items: center; }
+@media (min-width: 900px) { .feature-grid { grid-template-columns: 1.15fr 1fr; gap: 64px; } }
+.feature-media img { width: 100%; border-radius: 14px; }
+.feature-text h2 { margin: .4em 0 .2em; }
+.feature-tag { font: 1.2rem/1.4 var(--serif); color: var(--ink-soft); max-width: 30em; }
+.feature-facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 20px; margin: 1.2em 0 .4em; }
+.feature-facts div { padding: 12px 0; border-top: 1px solid var(--line); }
+.feature-facts dt { font-size: .85rem; color: var(--ink-soft); }
+.feature-facts dd { margin: 2px 0 0; font: 1.25rem/1.2 var(--serif); }
+@media (max-width: 520px) { .feature-facts { grid-template-columns: repeat(2, 1fr); } }
+.home-detail .specs { grid-template-columns: 1fr 1fr; }
+.home-hero img { width: 100%; border-radius: 14px; }
+.home-about-grid { display: grid; gap: 32px; }
+@media (min-width: 900px) { .home-about-grid { grid-template-columns: 1fr 1fr; gap: 64px; } }
+.home-about-grid p { max-width: 36em; }
+.checklist { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.checklist li { position: relative; padding-left: 28px; }
+.checklist li::before { content: ""; position: absolute; left: 2px; top: .45em; width: 12px; height: 7px; border-left: 2px solid var(--earth-dark); border-bottom: 2px solid var(--earth-dark); transform: rotate(-45deg); }
+.gallery { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+.gallery a { display: block; text-decoration: none; }
+.gallery img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 10px; transition: opacity .15s; }
+.gallery a:hover img { opacity: .88; }
+.gallery span { display: block; font-size: .88rem; color: var(--ink-soft); margin-top: 6px; }
+.plans { display: grid; gap: 20px; margin-top: 16px; }
+@media (min-width: 900px) { .plans { grid-template-columns: 1fr 1fr; align-items: start; } }
+.plan { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+.plan img { width: 100%; }
+.plan figcaption { text-align: center; }
+.levels { display: grid; gap: 28px; margin: 28px 0 8px; }
+@media (min-width: 900px) { .levels { grid-template-columns: 1fr 1fr; gap: 56px; } }
+.level-head { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 2px solid var(--ink); padding-bottom: 6px; }
+.level-head h3 { font-size: 1.3rem; margin: 0; }
+.level-head span { color: var(--ink-soft); font-size: .95rem; }
+.rooms { margin: 0; }
+.rooms div { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-bottom: 1px solid var(--line); }
+.rooms dd { margin: 0; color: var(--ink-soft); white-space: nowrap; }
+.swatches { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+.swatches li { background: #fff; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.swatch { display: block; height: 72px; border-bottom: 1px solid var(--line); }
+.sw-name { display: block; font: 1.15rem/1.2 var(--serif); padding: 12px 14px 2px; }
+.sw-use { display: block; font-size: .9rem; color: var(--ink-soft); padding: 0 14px 14px; }
+.agents { list-style: none; margin: 14px 0 12px; padding: 0; display: flex; flex-wrap: wrap; gap: 16px 48px; }
+.agents li { display: grid; gap: 2px; }
+.agents strong { font: 1.2rem/1.3 var(--serif); font-weight: 400; }
+.viewer { border: 0; padding: 0; background: transparent; max-width: min(1100px, 94vw); width: 100%; overflow: visible; }
+.viewer::backdrop { background: rgba(20,22,16,.88); }
+.viewer figure { margin: 0; }
+.viewer img { width: 100%; max-height: 80vh; object-fit: contain; border-radius: 8px; }
+.viewer figcaption { color: #fff; text-align: center; margin-top: 10px; }
+.viewer button { position: absolute; background: rgba(255,255,255,.92); border: 0; color: var(--ink); width: 48px; height: 48px; border-radius: 50%; font-size: 30px; line-height: 1; cursor: pointer; }
+.v-prev { left: 8px; top: 40%; } .v-next { right: 8px; top: 40%; } .v-close { right: 8px; top: 8px; font-size: 26px; }
