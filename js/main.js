@@ -131,7 +131,7 @@
       fetch(form.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) })
         .then(function (r) { return r.json(); })
         .then(function (d) {
-          if (d.success) { form.reset(); status.textContent = 'Message sent. A sales associate will be in touch shortly.'; }
+          if (d.success) { try { window.goatcounter && window.goatcounter.count({ path: 'inquiry-sent', title: 'Contact form sent', event: true }); } catch (e) {} form.reset(); status.textContent = 'Message sent. A sales associate will be in touch shortly.'; }
           else { status.textContent = "Your message didn't go through. Please call " + '254-233-7752 or email info@pecancreekrealty.com.'; }
         })
         .catch(function () { status.textContent = "Your message didn't go through. Please call 254-233-7752 or email info@pecancreekrealty.com."; })
