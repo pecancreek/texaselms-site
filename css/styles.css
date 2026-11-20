@@ -312,3 +312,15 @@ address { font-style: normal; line-height: 2; margin-top: 1.4em; font-size: 1.05
 .viewer figcaption { color: #fff; text-align: center; margin-top: 10px; }
 .viewer button { position: absolute; background: rgba(255,255,255,.92); border: 0; color: var(--ink); width: 48px; height: 48px; border-radius: 50%; font-size: 30px; line-height: 1; cursor: pointer; }
 .v-prev { left: 8px; top: 40%; } .v-next { right: 8px; top: 40%; } .v-close { right: 8px; top: 8px; font-size: 26px; }
+
+/* ---------- lot dropdown, updates opt-in, phone call bar */
+.field select { width: 100%; font: inherit; color: var(--ink); background: #fff; border: 2px solid transparent; border-radius: 10px; padding: 11px 14px; }
+.field select:focus { outline: none; border-color: var(--earth); }
+.check label { display: flex; gap: 10px; align-items: center; font-size: .95rem; color: #c8ccbd; cursor: pointer; }
+.check input { width: 20px; height: 20px; accent-color: var(--earth); }
+.mobile-cta { display: none; }
+@media (max-width: 560px) {
+  .mobile-cta { display: flex; gap: 10px; position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: rgba(241,241,236,.96); backdrop-filter: blur(8px); border-top: 1px solid var(--line); }
+  .mobile-cta .btn { flex: 1; min-height: 46px; padding: .6em .8em; font-size: .95rem; }
+  body { padding-bottom: 76px; }
+}

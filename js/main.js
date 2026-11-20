@@ -23,6 +23,8 @@
   var msg = document.getElementById('f-msg');
   function askAbout(n) {
     if (msg && !msg.value) msg.value = "I'm interested in " + (/^\d+$/.test(n) ? 'Lot ' + n : n) + ". ";
+    var sel = document.getElementById('f-lot'), v = /^\d+$/.test(n) ? 'Lot ' + n : n;
+    if (sel && Array.prototype.some.call(sel.options, function (o) { return o.value === v; })) sel.value = v;
   }
   document.addEventListener('click', function (e) {
     var a = e.target.closest('[data-ask]');
